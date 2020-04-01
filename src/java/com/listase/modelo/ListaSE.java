@@ -132,4 +132,25 @@ public class ListaSE implements Serializable{
         
     }
     
-}
+    public List PromedioEdadInfantes()
+    {
+        List<Infante> Edad = new ArrayList<>();
+        listarInfantes(Edad);
+        return Edad;
+    }
+    
+    
+    public String getPromedio(int Edad){
+        String promedio="Edad";
+        if(Edad == -1 ){
+            promedio = "niños";
+        }if(10 >= Edad){
+        }else{
+            promedio="niñas";
+            }return promedio;
+        }
+        
+    }
+        
+
+

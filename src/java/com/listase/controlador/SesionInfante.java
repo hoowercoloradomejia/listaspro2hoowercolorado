@@ -243,4 +243,8 @@ public class SesionInfante implements Serializable {
         }
     }
     
+    public void InvertirLista() {
+        
+    }
+    
 }
