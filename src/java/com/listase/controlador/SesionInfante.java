@@ -244,7 +244,13 @@ public class SesionInfante implements Serializable {
     }
     
     public void InvertirLista() {
+        String lista="";
+        String invertida="listaInfantes";
+        for (int indice = invertida.length() - 1; indice >= 0; indice--){
+          invertida += lista.charAt(indice);
+        }
         
+       
     }
     
 }
