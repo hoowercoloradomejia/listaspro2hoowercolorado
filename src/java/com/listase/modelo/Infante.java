@@ -15,15 +15,21 @@ public class Infante implements  Serializable{
     private String nombre; //null
     private short codigo; //0
     private byte edad; //0
+    private boolean genero;
+    private String ciudadNacimiento;
+    
 
     public Infante() {
         this.edad=1;
+       
     }    
     
-    public Infante(String nombre, short codigo, byte edad) {
+    public Infante(String nombre, short codigo, byte edad, boolean genero, String ciudadNacimiento) {
         this.nombre = nombre;
         this.codigo = codigo;
         this.edad = edad;
+        this.genero = genero;
+        this.ciudadNacimiento= ciudadNacimiento;
     }
 
     public String getNombre() {
@@ -50,6 +56,24 @@ public class Infante implements  Serializable{
         this.edad = edad;
     }
 
+    public boolean isGenero() {
+        return genero;
+    }
+
+    public void setGenero(boolean genero) {
+        this.genero = genero;
+    }
+
+    public String getCiudadNacimiento() {
+        return ciudadNacimiento;
+    }
+
+    public void setCiudadNacimiento(String ciudadNacimiento) {
+        this.ciudadNacimiento = ciudadNacimiento;
+    }
+
+    
+    
     @Override
     public String toString() {
        return this.nombre; 
