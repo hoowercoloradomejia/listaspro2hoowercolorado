@@ -43,6 +43,7 @@ public class ListaDE {
             cola=inicio;}
         else{
             NodoDE nuevo = new NodoDE(dato,null,null);
+            inicio=nuevo.getSiguiente();
             inicio=nuevo;
         }}
     
@@ -52,12 +53,45 @@ public class ListaDE {
             inicio=cola;}
         else{
             NodoDE nuevo = new NodoDE(dato,null,null);
-          
+            cola=nuevo.getAnterior();
             cola=nuevo;
         }} 
          
          //eliminar nodo
          
+         
+         
+         public void eliminarNodo(){
+             inicio=inicio.getSiguiente();
+          if(inicio !=null)
+          {inicio.setAnterior (null);}
+          else{cola=null;}
+          }
+         
+         
+          public void eliminarNodoDE(short codigo ) 
+    {
+        if(inicio !=null)
+        {
+            if(inicio.getDato().getCodigo()==codigo)
+            {
+                inicio=inicio.getSiguiente();
+                return;
+            }
+            else
+            {
+                NodoDE temp=inicio;
+                while(temp.getSiguiente()!=null)
+                {
+                    if(temp.getSiguiente().getDato().getCodigo()== codigo)
+                    {
+                         return;
+                    }
+                    temp = temp.getSiguiente();
+                }
+                
+            }}
+    }
         
          }
          
