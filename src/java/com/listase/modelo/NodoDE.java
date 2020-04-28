@@ -14,12 +14,6 @@ public class NodoDE {
     private NodoDE siguiente;
     private NodoDE anterior;
 
-    public NodoDE(Infante dato, NodoDE siguiente, NodoDE anterior) {
-        this.dato = dato;
-        this.siguiente = siguiente;
-        this.anterior = anterior;
-    }
-
     public NodoDE(Infante dato) {
         this.dato = dato;
     }

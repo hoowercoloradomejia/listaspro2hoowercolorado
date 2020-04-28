@@ -40,7 +40,9 @@
     <h:body>
         <p:growl id="grwlErrores"/>
         <h:form id="frmInfante">
-            <p:panel header="Lista Doblemente Enlazada Infantes - Total Infantes #{sesionInfante.listaInfantes.contarNodos()}">
+            
+            <p:panel header="Lista Simplemente Enlazada Infantes - Total Infantes #{sesionInfante.listaInfantes.contarNodos()}">
+                              
                 <p:panelGrid columns="2">
                     <p:panel header="Datos Infante">
 
@@ -159,12 +161,23 @@
                         </p:column>
                     </p:dataTable>
 
-                    <p:diagram rendered="#{sesionInfante.textoVista=='Tabla'}" value="#{sesionInfante.model}" style="height:600px; width: 100%;" styleClass="ui-widget-content" />
-
+                    <p:diagram id="diagrama" rendered="#{sesionInfante.textoVista=='Tabla'}" value="#{sesionInfante.model}" style="height:600px; width: 100%;" styleClass="ui-widget-content" />
+                    <p:contextMenu id="mnDiagrama" for="diagrama"
+                                   targetFilter=".ui-diagram-element"
+                                   <p:menuitem value="Ver Datos"
+                                               onclick="PF('dlgDatosInfante').show();"/>
+                                   <pmenuitem value="Eliminar"/>
+                                   <pmenuitem value="Enviar al final"/>
+                                   <pmenuitem value="Enviar al inicio"/>
+                                   <pmenuitem value="Adelantar/Perder Posicion"/>
                 </p:panel>
 
             </p:panel>
         </h:form>
+        <p:dialog header="Datos Infante" widgetVar="dlgDatosInfante"
+                  modal="true" height="100">
+            <h:outputText value="Ejemplo"/>
+        </p:dialog>
     </h:body>
 </html>
 

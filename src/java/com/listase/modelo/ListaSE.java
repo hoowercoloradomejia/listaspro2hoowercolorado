@@ -234,4 +234,32 @@ es el código a eliminar digo que cabeza=cabeza.siguiente si,no llamó al ayudan
         }
         throw new InfanteExcepcion("La lista de infantes está vacía");
     }
+    
+    
+     public Infante obtenerInfante(short codigo ) throws InfanteExcepcion
+    {
+        if(cabeza !=null)
+        {
+            if(cabeza.getDato().getCodigo()==codigo)
+            {                
+                return cabeza.getDato();
+            }
+            else
+            {
+                Nodo temp=cabeza;
+                while(temp!=null)
+                {
+                    if(temp.getDato().getCodigo()== codigo)
+                    {                                                
+                        return temp.getDato();
+                    }
+                    temp = temp.getSiguiente();
+                }
+                
+                throw new InfanteExcepcion("El código "+codigo +" no existe en la lista");
+            }
+        }
+        throw new InfanteExcepcion("La lista de infantes está vacía");
+    }
+    
 }

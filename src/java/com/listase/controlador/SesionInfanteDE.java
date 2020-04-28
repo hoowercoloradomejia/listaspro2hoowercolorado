@@ -7,22 +7,21 @@ package com.listase.controlador;
 
 import com.listase.excepciones.InfanteExcepcion;
 import com.listase.modelo.Infante;
+import com.listase.modelo.ListaDE;
 import com.listase.modelo.ListaSE;
 import com.listase.modelo.Nodo;
+import com.listase.modelo.NodoDE;
 import com.listase.utilidades.JsfUtil;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.faces.context.FacesContext;
 import org.primefaces.model.diagram.Connection;
 import org.primefaces.model.diagram.DefaultDiagramModel;
 import org.primefaces.model.diagram.DiagramModel;
 import org.primefaces.model.diagram.Element;
-import org.primefaces.model.diagram.connector.FlowChartConnector;
 import org.primefaces.model.diagram.connector.StateMachineConnector;
 import org.primefaces.model.diagram.endpoint.BlankEndPoint;
 import org.primefaces.model.diagram.endpoint.EndPoint;
@@ -34,14 +33,14 @@ import org.primefaces.model.diagram.overlay.LabelOverlay;
  *
  * @author carloaiza
  */
-@Named(value = "sesionInfante")
+@Named(value = "sesionInfanteDE")
 @SessionScoped
-public class SesionInfante implements Serializable {
-    private ListaSE listaInfantes;
+public class SesionInfanteDE implements Serializable {
+    private ListaDE listaInfantes;
     private Infante infante;
     private String alInicio="1";
     private boolean deshabilitarFormulario=true;
-    private Nodo ayudante;   
+    private NodoDE ayudante;   
     private String textoVista="Gráfico";
     
     private List listadoInfantes;
@@ -61,7 +60,7 @@ public class SesionInfante implements Serializable {
     /**
      * Creates a new instance of SesionInfante
      */
-    public SesionInfante() {        
+    public SesionInfanteDE() {        
     }
     
     @PostConstruct
@@ -71,10 +70,10 @@ public class SesionInfante implements Serializable {
         //inicializando el combo en el primer depto
         codigoDeptoSel = controlLocalidades.getDepartamentos().get(0).getCodigo();
         
-        listaInfantes = new ListaSE();        
+        listaInfantes = new ListaDE();        
         //LLenado de la bds
         listaInfantes.adicionarNodo(new Infante("Carlitos",(short) 1, (byte)2, true,
-        controlLocalidades.getCiudades().get(0).getNombre()));
+                controlLocalidades.getCiudades().get(0).getNombre()));
         listaInfantes.adicionarNodo(new Infante("Juanita",(short) 2, (byte)3, false,
         controlLocalidades.getCiudades().get(3).getNombre()));
         listaInfantes.adicionarNodo(new Infante("Martina",(short) 3, (byte)1,false,
@@ -193,11 +192,11 @@ public class SesionInfante implements Serializable {
         this.alInicio = alInicio;
     }
     
-    public ListaSE getListaInfantes() {
+    public ListaDE getListaInfantes() {
         return listaInfantes;
     }
 
-    public void setListaInfantes(ListaSE listaInfantes) {
+    public void setListaInfantes(ListaDE listaInfantes) {
         this.listaInfantes = listaInfantes;
     }
 
@@ -236,6 +235,16 @@ public class SesionInfante implements Serializable {
         deshabilitarFormulario=false;
         infante = new Infante();
     }
+    
+    public void irAnterior()
+    {
+        if(ayudante.getAnterior()!=null)
+        {
+            ayudante = ayudante.getAnterior();
+            infante = ayudante.getDato();
+        }        
+    }
+    
     
     public void irSiguiente()
     {
@@ -308,7 +317,7 @@ public class SesionInfante implements Serializable {
         ///Adicionar los elementos
         if (listaInfantes.getCabeza() != null) {
             //llamo a mi ayudante
-            Nodo temp = listaInfantes.getCabeza();
+            NodoDE temp = listaInfantes.getCabeza();
             int posX=2;
             int posY=2;
             //recorro la lista de principio a fin
@@ -323,6 +332,9 @@ public class SesionInfante implements Serializable {
                 //adiciona un conector al cuadrito
                 ele.addEndPoint(new BlankEndPoint(EndPointAnchor.TOP));
                 ele.addEndPoint(new BlankEndPoint(EndPointAnchor.BOTTOM_RIGHT));
+                
+                ele.addEndPoint(new BlankEndPoint(EndPointAnchor.BOTTOM_LEFT));
+                ele.addEndPoint(new BlankEndPoint(EndPointAnchor.BOTTOM));
                 model.addElement(ele);                    
                 temp=temp.getSiguiente();
                 posX=  posX+5;
@@ -334,6 +346,10 @@ public class SesionInfante implements Serializable {
             {
                 model.connect(createConnection(model.getElements().get(i).getEndPoints().get(1), 
                         model.getElements().get(i+1).getEndPoints().get(0), "Sig"));
+                
+                
+                model.connect(createConnection(model.getElements().get(i+1).getEndPoints().get(2), 
+                        model.getElements().get(i).getEndPoints().get(3), "Ant"));
             }
             
         }
@@ -409,7 +425,6 @@ public class SesionInfante implements Serializable {
             JsfUtil.addErrorMessage(ex.getMessage());
         }
     }
-    
     
     
 }
