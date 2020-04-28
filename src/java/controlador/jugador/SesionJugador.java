@@ -2,7 +2,7 @@ package controlador.jugador;
 
 
 
-import JugadorExcepciones.JugadorExcepcion;
+import jugador.excepciones.JugadorExcepcion;
 import MotoGp.Jugador;
 import MotoGp.ListaJU;
 import MotoGp.Moto;
@@ -25,7 +25,7 @@ import org.primefaces.model.diagram.endpoint.EndPoint;
 import org.primefaces.model.diagram.endpoint.EndPointAnchor;
 import org.primefaces.model.diagram.overlay.ArrowOverlay;
 import org.primefaces.model.diagram.overlay.LabelOverlay;
-import utilidades.JsfUtil;
+import com.listase.utilidades.JsfUtil;
 
 @Named(value = "sesionJugador")
 @SessionScoped
@@ -41,8 +41,6 @@ public class SesionJugador implements Serializable {
     
     private DefaultDiagramModel model;
     
-    private short codigoEliminar;
-        
     private short jugadorSeleccionado;
     
     private Jugador jugadorDiagrama;
@@ -56,9 +54,12 @@ public class SesionJugador implements Serializable {
          
         listaJugadores = new ListaJU();        
         
-        listaJugadores.adicionarMoto(new Jugador("",(short) 1, (byte)2, true,
-               
-        ayudante = listaJugadores.getCabeza()));
+        listaJugadores.adicionarMoto(new Jugador("",(short) 1, (byte)2, true));
+        listaJugadores.adicionarMoto(new Jugador("",(short) 1, (byte)2, true));
+        listaJugadores.adicionarMoto(new Jugador("",(short) 1, (byte)2, true));
+        listaJugadores.adicionarMoto(new Jugador("",(short) 1, (byte)2, true));
+        
+        ayudante = listaJugadores.getCabeza();
         jugador = ayudante.getDato();     
         
         listadoJugadores = listaJugadores.obtenerListaJugadores();
@@ -96,14 +97,7 @@ public class SesionJugador implements Serializable {
         return conn;
     }
 
-    public short getCodigoEliminar() {
-        return codigoEliminar;
-    }
-
-    public void setCodigoEliminar(short codigoEliminar) {
-        this.codigoEliminar = codigoEliminar;
-    }
-   public String getTextoVista() {
+    public String getTextoVista() {
         return textoVista;
     }
 
@@ -161,7 +155,7 @@ public class SesionJugador implements Serializable {
         }
         else
         {
-            listaJugadores.adicionarNodo(jugador);
+            listaJugadores.adicionarMoto(jugador);
         }  
         listadoJugadores = listaJugadores.obtenerListaJugadores();
         pintarLista();
@@ -278,12 +272,8 @@ public class SesionJugador implements Serializable {
         jugadorSeleccionado = Short.valueOf(id.replaceAll("frmInfante:diagrama-", ""));
         
     }
-
-      public void obtenerInfanteDiagrama()
-    {
-        jugadorDiagrama = listaJugadores.obtenerJugador(jugadorSeleccionado);
-    }
-    
+     
+      
 }
     
 

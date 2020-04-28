@@ -22,11 +22,7 @@ public class Jugador implements  Serializable{
         
     }
 
-    Jugador(String string, short s, byte b, boolean b0, Moto cabeza) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    public String getNombre() {
+     public String getNombre() {
         return nombre;
     }
 

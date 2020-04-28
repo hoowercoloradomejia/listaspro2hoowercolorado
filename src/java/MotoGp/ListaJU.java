@@ -1,6 +1,9 @@
 package MotoGp;
 
 
+import jugador.excepciones.JugadorExcepcion;
+import MotoGp.Jugador;
+import MotoGp.Moto;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +23,7 @@ public class ListaJU implements Serializable{
         this.cabeza = cabeza;
     }
     
-    public void adicionarNodo(Jugador jugador)
+    public void adicionarMoto(Jugador jugador)
     {
         if(cabeza ==null)
         {
@@ -152,6 +155,7 @@ public class ListaJU implements Serializable{
         }
     }
     
+     
    }
        
 
