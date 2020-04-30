@@ -39,95 +39,69 @@
     </h:head>
     <h:body>
         <p:growl id="grwlErrores"/>
-        <h:form id="frmInfante">
+        <h:form id="frmJugador">
             
-            <p:panel header="Lista Simplemente Enlazada Infantes - Total Infantes #{sesionInfante.listaInfantes.contarNodos()}">
+            <p:panel header="JUEGO MOTTOGP #{sesionJugador.listaJugadores.contarMotos()}">
                               
                 <p:panelGrid columns="2">
-                    <p:panel header="Datos Infante">
+                    <p:panel header="Datos Jugador">
 
                         <p:panelGrid columns="2">
                             <p:outputLabel for="txtNombre" value="Nombre"/>
-                            <p:inputText id="txtNombre" required="true" disabled="#{sesionInfante.deshabilitarFormulario}"
-                                         value="#{sesionInfante.infante.nombre}"   />
+                            <p:inputText id="txtNombre" required="true" disabled="#{sesionJugador.deshabilitarFormulario}"
+                                         value="#{sesionJugador.jugador.nombre}"   />
                             <p:outputLabel for="spEdad" value="Edad"/>
-                            <p:spinner id="spEdad" required="true" min="1" max="7" disabled="#{sesionInfante.deshabilitarFormulario}"
-                                       value="#{sesionInfante.infante.edad}"/>
+                            <p:spinner id="spEdad" required="true" min="1" max="7" disabled="#{sesionJugador.deshabilitarFormulario}"
+                                       value="#{sesionJugador.jugador.edad}"/>
                             <p:outputLabel value="Género"/>
-                            <p:selectOneMenu value="#{sesionInfante.infante.genero}"
-                                             disabled="#{sesionInfante.deshabilitarFormulario}">
+                            <p:selectOneMenu value="#{sesionJugador.jugador.genero}"
+                                             disabled="#{sesionJugador.deshabilitarFormulario}">
                                 <f:selectItem itemLabel="Niño" itemValue="true"/>
                                 <f:selectItem itemLabel="Niña" itemValue="false"/>
                             </p:selectOneMenu>
                             
-                            <p:outputLabel value="Departamento"/>
-                            <p:selectOneMenu value="#{sesionInfante.codigoDeptoSel}" disabled="#{sesionInfante.deshabilitarFormulario}" >
-                                <f:selectItems value="#{sesionInfante.controlLocalidades.departamentos}" 
-                                               var="depto" itemLabel="#{depto.nombre}" itemValue="#{depto.codigo}"
-                                               />
-                                <p:ajax event="change" update="cmbCiudad" process="cmbCiudad" />
-                            </p:selectOneMenu>
-                            
-                            <p:outputLabel value="Ciudad"/>
-                            <p:selectOneMenu id="cmbCiudad" value="#{sesionInfante.infante.ciudadNacimiento}" disabled="#{sesionInfante.deshabilitarFormulario}"  >
-                                <f:selectItems value="#{sesionInfante.controlLocalidades.obtenerCiudadesxDepto(sesionInfante.codigoDeptoSel)}" 
-                                               var="ciudad" itemLabel="#{ciudad.nombre}" itemValue="#{ciudad.nombre}"
-                                               />
-                            </p:selectOneMenu>
-                            
-
                             <p:outputLabel value="Al inicio"/>
-                            <p:selectOneMenu value="#{sesionInfante.alInicio}" disabled="#{sesionInfante.deshabilitarFormulario}">
+                            <p:selectOneMenu value="#{sesionJugador.alInicio}" disabled="#{sesionJugador.deshabilitarFormulario}">
                                 <f:selectItem itemLabel="SI" itemValue="1"/>
                                 <f:selectItem itemLabel="NO" itemValue="0"/>
                             </p:selectOneMenu>
                         </p:panelGrid>
-                        <p:commandButton value="Guardar" update="frmInfante,:grwlErrores"
-                                         action="#{sesionInfante.guardarInfante()}" disabled="#{sesionInfante.deshabilitarFormulario}"/>
+                        <p:commandButton value="Guardar" update="frmJugador,:grwlErrores"
+                                         action="#{sesionJugador.guardarJugador()}" disabled="#{sesionJugador.deshabilitarFormulario}"/>
 
-                        <p:commandButton value="Nuevo" update="frmInfante" action="#{sesionInfante.habilitarFormulario()}"
-                                         disabled="#{!sesionInfante.deshabilitarFormulario}"
+                        <p:commandButton value="Nuevo" update="frmJugador" action="#{sesionJugador.habilitarFormulario()}"
+                                         disabled="#{!sesionJugador.deshabilitarFormulario}"
                                          />
-                        <p:commandButton value="Invertir"  update="frmInfante,:grwlErrores"
-                                         action="#{sesionInfante.invertirLista()}"
+                        <p:commandButton value="Invertir"  update="frmJugador,:grwlErrores"
+                                         action="#{sesionJugador.invertirLista()}"
                                          />
                         <p:panelGrid columns="3">
-                            <p:commandButton value="Primero" action="#{sesionInfante.irPrimero()}" 
-                                             update="frmInfante"/>
-                            <p:commandButton value="Siguiente" action="#{sesionInfante.irSiguiente()}"
-                                             update="frmInfante"/>       
-                            <p:commandButton value="Último" action="#{sesionInfante.irUltimo()}" 
-                                             update="frmInfante"/>                           
+                            <p:commandButton value="Primero" action="#{sesionJugador.irPrimero()}" 
+                                             update="frmJugador"/>
+                            <p:commandButton value="Siguiente" action="#{sesionJugador.irSiguiente()}"
+                                             update="frmJugador"/>       
+                            <p:commandButton value="Último" action="#{sesionJugador.irUltimo()}" 
+                                             update="frmJugador"/>                           
 
                         </p:panelGrid>
-                        <p:outputLabel value="Código a eliminar: "/>
-                        <p:inputText value="#{sesionInfante.codigoEliminar}" maxlength="4" size="10"/>
-                        <p:commandButton value="Eliminar" action="#{sesionInfante.eliminarInfante()}" 
-                                         update="frmInfante,:grwlErrores"
-                                         />
+                       
                     </p:panel>
                     <p:panel header="Reportes">
-                        <p:outputLabel value="Promedio de Edad de los infantes: #{sesionInfante.listaInfantes.promediarEdades()}"/>
+                        <p:outputLabel value="Promedio de Edad de los Jugadores: #{sesionJugador.listaJugadores.promediarEdades()}"/>
                         <br/>
-                        <p:outputLabel value="#{sesionInfante.listaInfantes.obtenerListadoInfantes()}"/>
+                        <p:outputLabel value="#{sesionJugador.listaJugadores.obtenerListadoJugadores()}"/>
                         <br/>
-                        <h:panelGrid columns="2">
-                            <p:outputLabel value="Cantidad Niños: "/>
-                            <p:outputLabel value="#{sesionInfante.listaInfantes.contarInfantesxGenero(true)}"/>               
-                            <p:outputLabel value="Cantidad Niñas: "/>
-                            <p:outputLabel value="#{sesionInfante.listaInfantes.contarInfantesxGenero(false)}"/>
-                        </h:panelGrid>
-                    </p:panel>
+                        </p:panel>
 
 
                 </p:panelGrid>
 
                 <p:panel header="Gráfico" id="pnlVista" style="width: 100%;">
-                    <p:commandButton value="#{sesionInfante.textoVista}" 
-                                     action="#{sesionInfante.cambiarVistaInfantes()}"
+                    <p:commandButton value="#{sesionJugador.textoVista}" 
+                                     action="#{sesionJugador.cambiarVistaJugadores()}"
                                      update="pnlVista"/>
 
-                    <p:dataTable rendered="#{sesionInfante.textoVista=='Gráfico'}"  value="#{sesionInfante.listadoInfantes}" var="inf">
+                    <p:dataTable rendered="#{sesionJugador.textoVista=='Gráfico'}"  value="#{sesionJugador.listadoJugadores}" var="inf">
                         <p:column>
                             <f:facet name="header">
                                 <p:outputLabel value="Código"/>
@@ -154,27 +128,21 @@
                             <p:outputLabel rendered="#{!inf.genero}"  value="Niña"/>                                
                         </p:column>
                         <p:column>
-                            <f:facet name="header">
-                                <p:outputLabel value="Ciudad nacimiento"/>
-                            </f:facet>
-                            <p:outputLabel value="#{inf.ciudadNacimiento}"/>
-                        </p:column>
+                              </p:column>
                     </p:dataTable>
 
-                    <p:diagram id="diagrama" rendered="#{sesionInfante.textoVista=='Tabla'}" value="#{sesionInfante.model}" style="height:600px; width: 100%;" styleClass="ui-widget-content" />
+                    <p:diagram id="diagrama" rendered="#{sesionJugador.textoVista=='Tabla'}" value="#{sesionJugador.model}" style="height:600px; width: 100%;" styleClass="ui-widget-content" />
                     <p:contextMenu id="mnDiagrama" for="diagrama"
                                    targetFilter=".ui-diagram-element"
                                    <p:menuitem value="Ver Datos"
-                                               onclick="PF('dlgDatosInfante').show();"/>
+                                               onclick="PF('dlgDatosJugador').show();"/>
                                    <pmenuitem value="Eliminar"/>
-                                   <pmenuitem value="Enviar al final"/>
-                                   <pmenuitem value="Enviar al inicio"/>
                                    <pmenuitem value="Adelantar/Perder Posicion"/>
                 </p:panel>
 
             </p:panel>
         </h:form>
-        <p:dialog header="Datos Infante" widgetVar="dlgDatosInfante"
+        <p:dialog header="Datos Jugador" widgetVar="dlgDatosJugador"
                   modal="true" height="100">
             <h:outputText value="Ejemplo"/>
         </p:dialog>
