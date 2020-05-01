@@ -6,6 +6,7 @@ import jugador.excepciones.JugadorExcepcion;
 import MotoGp.Jugador;
 import MotoGp.ListaJU;
 import MotoGp.Moto;
+import com.listase.excepciones.InfanteExcepcion;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
@@ -269,10 +270,17 @@ public class SesionJugador implements Serializable {
         String id = FacesContext.getCurrentInstance().getExternalContext()
                 .getRequestParameterMap().get("elementId");
          
-        jugadorSeleccionado = Short.valueOf(id.replaceAll("frmInfante:diagrama-", ""));
+        jugadorSeleccionado = Short.valueOf(id.replaceAll("frmJugador:diagrama-", ""));
         
     }
-     
+     public void obtenerJugadorDiagrama()
+    {
+        try {
+            jugadorDiagrama = listaJugadores.obtenerJugador(jugadorSeleccionado);
+        } catch (JugadorExcepcion ex) {
+            JsfUtil.addErrorMessage(ex.getMessage());
+        }
+    }
       
 }
     

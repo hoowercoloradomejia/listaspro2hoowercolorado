@@ -10,7 +10,7 @@ public class Jugador implements  Serializable{
     private boolean genero;
    
     public Jugador() {
-        this.edad=5;
+        this.edad=100;
        
     }    
     

@@ -121,25 +121,7 @@ public class ListaJU implements Serializable{
         
     }
     
-    public float promediarEdades()
-    {
-        int sumaEdades= 0;
-        int contador=0;
-        if(cabeza !=null)
-        {
-            Moto temp= cabeza;            
-            while(temp!=null)
-            {          
-                //sumaEdades= sumaEdades+ temp.getDato().getEdad();
-                sumaEdades += temp.getDato().getEdad();
-                contador++;
-                temp=temp.getSiguiente();                
-            }   
-            return sumaEdades/(float) contador;
-        }
-        return 0;
-        
-    }
+    
     public void invertirLista()
     {
         if(cabeza!=null)
@@ -154,7 +136,32 @@ public class ListaJU implements Serializable{
             cabeza= listaTemporal.getCabeza();
         }
     }
-    
+
+     public Jugador obtenerJugador(short codigo ) throws JugadorExcepcion
+    {
+        if(cabeza !=null)
+        {
+            if(cabeza.getDato().getCodigo()==codigo)
+            {                
+                return cabeza.getDato();
+            }
+            else
+            {
+                Moto temp=cabeza;
+                while(temp!=null)
+                {
+                    if(temp.getDato().getCodigo()== codigo)
+                    {                                                
+                        return temp.getDato();
+                    }
+                    temp = temp.getSiguiente();
+                }
+                
+                throw new JugadorExcepcion("El código "+codigo +" no existe en la lista");
+            }
+        }
+        throw new JugadorExcepcion("La lista de jugadores está vacía");
+    }  
      
    }
        
