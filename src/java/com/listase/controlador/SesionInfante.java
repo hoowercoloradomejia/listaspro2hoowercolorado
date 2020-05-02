@@ -17,7 +17,10 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import org.primefaces.event.CloseEvent;
+import org.primefaces.event.MoveEvent;
 import org.primefaces.model.diagram.Connection;
 import org.primefaces.model.diagram.DefaultDiagramModel;
 import org.primefaces.model.diagram.DiagramModel;
@@ -410,6 +413,25 @@ public class SesionInfante implements Serializable {
         }
     }
     
+     
+    public void Confirmareliminacion() {
+           
+        if(codigoEliminar >0)
+        {
+            //llamo el eliminar de la lista
+            try{
+                listaInfantes.eliminarInfante(codigoEliminar);
+                irPrimero();
+                JsfUtil.addSuccessMessage("Infante "+codigoEliminar +" eliminado.");
+            }
+            catch(InfanteExcepcion e)
+            {
+                JsfUtil.addErrorMessage(e.getMessage());
+            }
+        }
+        else
+        {
+            JsfUtil.addErrorMessage("El código a eliminar "+codigoEliminar+ " no es válido");
+        }
     
-    
-}
+}}

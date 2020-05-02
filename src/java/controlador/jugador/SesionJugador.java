@@ -7,6 +7,7 @@ import MotoGp.Jugador;
 import MotoGp.ListaJU;
 import MotoGp.Moto;
 import com.listase.excepciones.InfanteExcepcion;
+import com.listase.modelo.Infante;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
@@ -56,10 +57,7 @@ public class SesionJugador implements Serializable {
         listaJugadores = new ListaJU();        
         
         listaJugadores.adicionarMoto(new Jugador("",(short) 1, (byte)2, true));
-        listaJugadores.adicionarMoto(new Jugador("",(short) 1, (byte)2, true));
-        listaJugadores.adicionarMoto(new Jugador("",(short) 1, (byte)2, true));
-        listaJugadores.adicionarMoto(new Jugador("",(short) 1, (byte)2, true));
-        
+                
         ayudante = listaJugadores.getCabeza();
         jugador = ayudante.getDato();     
         
@@ -226,8 +224,7 @@ public class SesionJugador implements Serializable {
         irPrimero();
     }
     
-    
-    public void pintarLista() {
+     public void pintarLista() {
         //Instancia el modelo
         model = new DefaultDiagramModel();
         //Se establece para que el diagrama pueda tener infinitas flechas
@@ -281,7 +278,31 @@ public class SesionJugador implements Serializable {
             JsfUtil.addErrorMessage(ex.getMessage());
         }
     }
-      
+    
+     public void perderPosicion()
+    {
+        try {
+            Jugador infTemporal = listaJugadores.obtenerJugador(jugadorSeleccionado);
+           listaJugadores.eliminarJugador(jugadorSeleccionado);
+           listaJugadores.adicionarMoto(infTemporal);
+            pintarLista();
+        } catch (JugadorExcepcion ex) {
+            JsfUtil.addErrorMessage(ex.getMessage());
+        }
+    }
+    
+    public void Adelantar()
+    {
+        try {
+            Jugador infTemporal = listaJugadores.obtenerJugador(jugadorSeleccionado);
+            listaJugadores.eliminarJugador(jugadorSeleccionado);
+            listaJugadores.adicionarMotoAlInicio(infTemporal);
+            
+            pintarLista();
+        } catch (JugadorExcepcion ex) {
+            JsfUtil.addErrorMessage(ex.getMessage());
+        }
+    }
 }
     
 

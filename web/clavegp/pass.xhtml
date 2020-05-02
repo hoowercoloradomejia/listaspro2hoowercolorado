@@ -39,26 +39,23 @@
     </h:head>
     <h:body>
         <p:growl id="grwlErrores"/>
-        <h:form id="frmJugador">
+        <h:form id="frmUsuario">
             
-            <p:panel header="JUEGO MOTOGP #{sesionJugador.listaJugadores.contarMotos()}">
+            <p:panel header="JUEGO MOTOGP ">
                               
                 <p:panelGrid columns="2">
                     <p:panel header="Datos Administrador">
 
                         <p:panelGrid columns="2">
-                            <p:outputLabel for="txtNombre" value="Nombre"/>
-                            <p:inputText id="txtNombre" required="true" disabled="#{sesionJugador.deshabilitarFormulario}"
-                                         value="#{sesionJugador.jugador.nombre}"   />
-                            <p:outputLabel for="spEdad" value="Edad"/>
-                            <p:inputText id="spEdad" required="true" disabled="#{sesionJugador.deshabilitarFormulario}"
-                                       value="#{sesionJugador.jugador.edad}"/>
+                            <p:outputLabel for="txtUsuario" value="Usuario" />
+                            <p:inputText id="txtUsuario" required="true"  />
+                            <p:outputLabel for="spClave" value="Clave"/>
+                            <p:inputText id="spClave" required="true" />
                                                                                 
                             </p:panelGrid>
                         
-                        <p:commandButton value="Aceptar" update="frmJugador" action="#{sesionJugador.habilitarFormulario()}"
-                                         disabled="#{!sesionJugador.deshabilitarFormulario}"
-                                         />
+                        <p:commandButton value="Aceptar"  action="moto/index.xhtml" ajax="false"/>
+                                      
                                                                       
                     </p:panel>
                     </p:panelGrid>

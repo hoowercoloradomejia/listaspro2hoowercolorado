@@ -4,6 +4,8 @@ package MotoGp;
 import jugador.excepciones.JugadorExcepcion;
 import MotoGp.Jugador;
 import MotoGp.Moto;
+import com.listase.excepciones.InfanteExcepcion;
+import com.listase.modelo.Nodo;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -135,6 +137,34 @@ public class ListaJU implements Serializable{
             }   
             cabeza= listaTemporal.getCabeza();
         }
+    }
+    public void eliminarJugador(short codigo ) throws JugadorExcepcion
+    {
+        if(cabeza !=null)
+        {
+            if(cabeza.getDato().getCodigo()==codigo)
+            {
+                cabeza=cabeza.getSiguiente();
+                return;
+            }
+            else
+            {
+                Moto temp=cabeza;
+                while(temp.getSiguiente()!=null)
+                {
+                    if(temp.getSiguiente().getDato().getCodigo()== codigo)
+                    {
+                        //el que sigue es el que hay que eliminar
+                        temp.setSiguiente(temp.getSiguiente().getSiguiente());
+                        return;
+                    }
+                    temp = temp.getSiguiente();
+                }
+                
+                throw new JugadorExcepcion("El código "+codigo +" no existe en la lista");
+            }
+        }
+        throw new JugadorExcepcion("La lista de infantes está vacía");
     }
 
      public Jugador obtenerJugador(short codigo ) throws JugadorExcepcion

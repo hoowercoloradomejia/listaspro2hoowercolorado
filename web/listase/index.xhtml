@@ -90,6 +90,7 @@
                         <p:commandButton value="Invertir"  update="frmInfante,:grwlErrores"
                                          action="#{sesionInfante.invertirLista()}"
                                          />
+                        <p:commandButton value="Mostrar Infante menor Edad"/>
                         <p:panelGrid columns="3">
                             <p:commandButton value="Primero" action="#{sesionInfante.irPrimero()}" 
                                              update="frmInfante"/>
@@ -188,7 +189,7 @@
                                     update="panelInfante"                                    
                                     oncomplete="PF('dlgDatosInfante').show();" />
                         <p:menuitem value="Eliminar"/>
-                        <p:menuitem value="Enviar al final" update="pnlVista"                                    
+                         <p:menuitem value="Enviar al final" update="pnlVista"                                    
                                     action="#{sesionInfante.enviarAlFinal()}"/>
                         <p:menuitem value="Enviar al inicio" update="pnlVista"                                    
                                     action="#{sesionInfante.enviarAlInicio()}"                                    

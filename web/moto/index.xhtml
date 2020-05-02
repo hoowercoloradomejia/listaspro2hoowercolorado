@@ -17,6 +17,7 @@
                 border: 1px solid transparent;
                 background-color: #98AFC7;
                 color: #ffffff;
+                                
             }
 
             .ui-diagram-success {
@@ -52,13 +53,6 @@
                             <p:outputLabel for="spEdad" value="Edad"/>
                             <p:spinner id="spEdad" required="true" min="0" max="100" disabled="#{sesionJugador.deshabilitarFormulario}"
                                        value="#{sesionJugador.jugador.edad}"/>
-                            <p:outputLabel value="Género"/>
-                            <p:selectOneMenu value="#{sesionJugador.jugador.genero}"
-                                             disabled="#{sesionJugador.deshabilitarFormulario}">
-                                <f:selectItem itemLabel="Niño" itemValue="true"/>
-                                <f:selectItem itemLabel="Niña" itemValue="false"/>
-                            </p:selectOneMenu>
-
                             <p:outputLabel value="Al inicio"/>
                             <p:selectOneMenu value="#{sesionJugador.alInicio}" disabled="#{sesionJugador.deshabilitarFormulario}">
                                 <f:selectItem itemLabel="SI" itemValue="1"/>
@@ -111,13 +105,7 @@
                             </f:facet>
                             <p:outputLabel value="#{inf.edad}"/>
                         </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <p:outputLabel value="Género"/>
-                            </f:facet>
-                            <p:outputLabel rendered="#{inf.genero}"  value="Niño"/>
-                            <p:outputLabel rendered="#{!inf.genero}"  value="Niña"/>                                
-                        </p:column>
+                        
                         </p:dataTable>
 
                     <p:diagram id="diagrama" rendered="#{sesionJugador.textoVista=='Tabla'}" value="#{sesionJugador.model}" style="height:600px; width: 100%;" styleClass="ui-widget-content" />
@@ -147,8 +135,10 @@
                                     action="#{sesionJugador.obtenerJugadorDiagrama()}" 
                                     update="panelJugador"                                    
                                     oncomplete="PF('dlgDatosJugador').show();" />
-                        <p:menuitem value="Eliminar"/>
-                        <p:menuitem value="Adelantar/Perder Posición"/>
+                        <p:menuitem value="Adelantar" update ="pnlVista"                                    
+                        action="#{sesionJugador.Adelantar()}"/>
+                        <p:menuitem value="Perder Posición" update="pnlVista"                                    
+                                    action="#{sesionJugador.perderPosicion()}"/>
                     </p:contextMenu>
                 </p:panel>
             </p:panel>
