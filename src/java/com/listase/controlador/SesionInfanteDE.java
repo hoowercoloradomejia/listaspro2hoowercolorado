@@ -57,6 +57,10 @@ public class SesionInfanteDE implements Serializable {
     
     private Infante infanteDiagrama;
     
+    private Infante infanteMenor;
+    
+    private int posicionInfante;
+    
     /**
      * Creates a new instance of SesionInfante
      */
@@ -85,8 +89,19 @@ public class SesionInfanteDE implements Serializable {
         //Me llena el objeto List para la tabla
         listadoInfantes = listaInfantes.obtenerListaInfantes();
         pintarLista();
+        
+        
    }
 
+    public int getPosicionInfante() {
+        return posicionInfante;
+    }
+
+    public void setPosicionInfante(int posicionInfante) {
+        this.posicionInfante = posicionInfante;
+    }
+
+    
     public Infante getInfanteDiagrama() {
         return infanteDiagrama;
     }
@@ -394,6 +409,25 @@ public class SesionInfanteDE implements Serializable {
         }
     }
     
+    public void obtenerInfanteMenor()
+    {
+        try {
+            infanteDiagrama = listaInfantes.obtenerInfanteMenorEdad();
+        } catch (InfanteExcepcion ex) {
+            JsfUtil.addErrorMessage(ex.getMessage());
+        }
+    }
+    
+    public void obtenerPosicionInfante()
+    {
+        try {
+           posicionInfante = listaInfantes.obtenerPosicionInfante(infanteSeleccionado);
+        } catch (InfanteExcepcion ex) {
+            JsfUtil.addErrorMessage(ex.getMessage());
+        }
+    }
+    
+          
     public void enviarAlFinal()
     {
         try {

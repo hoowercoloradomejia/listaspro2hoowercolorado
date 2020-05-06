@@ -106,6 +106,7 @@
                                          update="frmInfante,:grwlErrores"
                                          />
                     </p:panel>
+                    <h:panelGroup>
                     <p:panel header="Reportes">
                         <p:outputLabel value="Promedio de Edad de los infantes: #{sesionInfante.listaInfantes.promediarEdades()}"/>
                         <br/>
@@ -118,6 +119,11 @@
                             <p:outputLabel value="#{sesionInfante.listaInfantes.contarInfantesxGenero(false)}"/>
                         </h:panelGrid>
                     </p:panel>
+                    <p:commandButton value="Ver infante menor"
+                                     action="#{sesionInfanteSE.obtenerInfanteMenor()}" 
+                                    update="panelInfante"                                    
+                                    oncomplete="PF('dlgDatosInfante').show();" />  
+                    </h:panelGroup>
 
 
                 </p:panelGrid>

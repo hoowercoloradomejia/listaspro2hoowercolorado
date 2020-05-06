@@ -303,6 +303,7 @@ public class SesionJugador implements Serializable {
             JsfUtil.addErrorMessage(ex.getMessage());
         }
     }
+    
 }
     
 

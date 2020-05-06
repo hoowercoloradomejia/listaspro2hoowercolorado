@@ -381,6 +381,15 @@ public class SesionInfante implements Serializable {
         }
     }
     
+    public void obtenerInfanteMenor()
+    {
+        try {
+            infanteDiagrama = listaInfantes.obtenerInfanteMenorEdad();
+        } catch (InfanteExcepcion ex) {
+            JsfUtil.addErrorMessage(ex.getMessage());
+        }
+    }
+    
     public void enviarAlFinal()
     {
         try {

@@ -261,5 +261,24 @@ es el código a eliminar digo que cabeza=cabeza.siguiente si,no llamó al ayudan
         }
         throw new InfanteExcepcion("La lista de infantes está vacía");
     }
-    
-}
+   
+     public Infante obtenerInfanteMenorEdad() throws InfanteExcepcion
+   {
+     if(cabeza !=null) 
+     {
+     Infante menor = cabeza.getDato();
+     Nodo temp = cabeza;
+     while(temp !=null)
+     {
+       if(temp.getDato().getEdad()<menor.getEdad())
+         {
+          menor=temp.getDato();
+         }
+         temp = temp.getSiguiente();
+     } 
+     return menor;
+     }
+     {
+     throw new InfanteExcepcion("La lista de infantes está vacía");  
+   } 
+}}
